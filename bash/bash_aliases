@@ -1,0 +1,55 @@
+alias tree="tree --gitignore"
+# some more ls aliases
+alias ll='ls -alF'
+alias la='ls -A'
+alias l='ls -CF'
+
+# Add an "alert" alias for long running commands.  Use like so:
+#   sleep 10; alert
+alias alert='notify-send --urgency=low -i "$([ $? = 0 ] && echo terminal || echo error)" "$(history|tail -n1|sed -e '\''s/^\s*[0-9]\+\s*//;s/[;&|]\s*alert$//'\'')"'
+
+# Alias definitions.
+# You may want to put all your additions into a separate file like
+# ~/.bash_aliases, instead of adding them here directly.
+# See /usr/share/doc/bash-doc/examples in the bash-doc package.
+
+# Aliases for lsd, tldr, and bat if they exist
+have_lsd=
+command -v lsd > /dev/null && alias ls='lsd --group-dirs first' && {
+	alias lss='lsd --group-dirs first' 
+  have_lsd=1
+}
+
+# Check fzf version for preview options to use
+fzfver=0
+command -v fzf > /dev/null && {
+  fzfver=$(fzf --version | awk -F '.' '{ print $2 }')
+  command -v tldr > /dev/null && {
+    alias tldrf='tldr --list | fzf --preview "tldr {1} --color=always" --preview-window=right:70% | xargs tldr --color=always'
+  }
+}
+command -v bat > /dev/null && alias less='bat'
+command -v batcat > /dev/null && \
+	alias bat='batcat' && \
+	alias less='batcat'
+# To use Vim
+command -v vim > /dev/null && alias vi='vim'
+# To use Neovim
+command -v nvim > /dev/null && {
+  # For compatibility with earlier versions of .lazymanrc
+  if alias nvim >/dev/null 2>&1; then
+    unalias nvim
+  fi
+  if alias nvims >/dev/null 2>&1; then
+    unalias nvims
+  fi
+  if alias neovides >/dev/null 2>&1; then
+    unalias neovides
+  fi
+  alias vi='nvim'
+}
+command -v bat > /dev/null && alias less='bat'
+command -v batcat > /dev/null && \
+	alias bat='batcat' && \
+	alias less='batcat'
+
