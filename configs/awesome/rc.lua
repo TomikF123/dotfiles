@@ -463,9 +463,15 @@ globalkeys = mytable.join(
         { description = "show weather", group = "widgets" }),
 
     -- Screen brightness
-    awful.key({ modkey, "Control" }, "Up", function() os.execute("light -A 10") end,
+    -- awful.key({ modkey, "Control" }, "Up", function() os.execute("light -A 10") end,
+    --     { description = "+10%", group = "hotkeys" }),
+    -- awful.key({ modkey, "Control" }, "Down", function() os.execute("light -U 10") end,
+    --     { description = "-10%", group = "hotkeys" }),
+
+    -- Screen brightness
+    awful.key({ modkey, "Control" }, "Up", function() os.execute("brightnessctl set +10%") end,
         { description = "+10%", group = "hotkeys" }),
-    awful.key({ modkey, "Control" }, "Down", function() os.execute("light -U 10") end,
+    awful.key({ modkey, "Control" }, "Down", function() os.execute("brightnessctl set 10%-") end,
         { description = "-10%", group = "hotkeys" }),
 
     -- ALSA volume control
@@ -550,7 +556,9 @@ globalkeys = mytable.join(
     -- User programs
     awful.key({ modkey }, "q", function() awful.spawn(browser) end,
         { description = "run browser", group = "launcher" }),
+    
 
+    --DISABLE  touchpad tap to click
     -- Default
     --[[ Menubar
     awful.key({ modkey }, "p", function() menubar.show() end,
@@ -591,6 +599,12 @@ globalkeys = mytable.join(
         { description = "lua execute prompt", group = "awesome" })
 --]]
 )
+-- DISABLE touchpad tap to click on start
+awful.spawn.with_shell("xinput set-prop 13 \"Synaptics Tap Action\" 0 0 0 0 0 0 0")
+
+-- auto nighlight
+awful.spawn.with_shell("redshift -l 49.82:18.26")
+
 
 clientkeys = mytable.join(
     awful.key({ altkey, "Shift" }, "m", lain.util.magnify_client,
@@ -706,6 +720,7 @@ clientbuttons = mytable.join(
 
 -- Set keys
 root.keys(globalkeys)
+naughty.config.defaults['icon_size'] = 50
 
 -- }}}
 
