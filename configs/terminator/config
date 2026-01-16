@@ -1,17 +1,17 @@
 [global_config]
   tab_position = hidden
-  title_font = Z003 Medium Italic 9
 [keybindings]
 [profiles]
   [[default]]
     background_color = "#282828"
     background_darkness = 0.84
     background_type = transparent
-    cursor_color = "#aaaaaa"
-    font = JetBrainsMono Nerd Font Light 10
+    font = JetBrainsMono Nerd Font Bold 10
     foreground_color = "#ebdbb2"
     scrollbar_position = hidden
     use_system_font = False
+    title_use_system_font = False
+  [[New Profile]]
 [layouts]
   [[default]]
     [[[window0]]]

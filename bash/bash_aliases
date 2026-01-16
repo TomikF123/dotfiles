@@ -52,4 +52,10 @@ command -v bat > /dev/null && alias less='bat'
 command -v batcat > /dev/null && \
 	alias bat='batcat' && \
 	alias less='batcat'
+# Source - https://stackoverflow.com/a
+# Posted by Legend, modified by community. See post 'Timeline' for change history
+# Retrieved 2026-01-08, License - CC BY-SA 4.0
+
+alias "c=xclip"
+alias "v=xclip -o"
 

@@ -62,13 +62,19 @@ end
 -- {{{ Autostart windowless processes
 
 -- This function will run once every time Awesome is started
+-- DISABLE touchpad tap to click on start
+-- awful.spawn.with_shell("xinput set-prop 13 \"Synaptics Tap Action\" 0 0 0 0 0 0 0")
+
+-- -- auto nighlight
+-- awful.spawn.with_shell("redshift -l 49.82:18.26")
+
 local function run_once(cmd_arr)
     for _, cmd in ipairs(cmd_arr) do
-        awful.spawn.with_shell(string.format("pgrep -u $USER -fx '%s' > /dev/null || (%s)", cmd, cmd))
+        awful.spawn.with_shell(string.format("pgrep -u $USER -x '%s' > /dev/null || (%s)", cmd, cmd))
     end
 end
 
-run_once({ "urxvtd", "unclutter -root" }) -- comma-separated entries
+run_once({ "urxvtd", "unclutter -root" ,"xinput set-prop 13 \"Synaptics Tap Action\" 0 0 0 0 0 0 0"}) -- comma-separated entries
 
 -- This function implements the XDG autostart specification
 --[[
@@ -599,11 +605,6 @@ globalkeys = mytable.join(
         { description = "lua execute prompt", group = "awesome" })
 --]]
 )
--- DISABLE touchpad tap to click on start
-awful.spawn.with_shell("xinput set-prop 13 \"Synaptics Tap Action\" 0 0 0 0 0 0 0")
-
--- auto nighlight
-awful.spawn.with_shell("redshift -l 49.82:18.26")
 
 
 clientkeys = mytable.join(
